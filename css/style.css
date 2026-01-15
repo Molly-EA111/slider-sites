@@ -24,23 +24,30 @@ html, body {
   background-position: center;
 }
 
-/* NAV SLIDER */
+/* NAV SLIDER CONTENEDOR */
 .nav-slider {
   width: 20%;
   height: 100vh;
   float: left;
   background: #000;
+  overflow: hidden; /* 🔒 OCULTA LO QUE HAY DETRÁS */
 }
 
+/* WRAPPER */
+.nav-slider .swiper-wrapper {
+  height: 100%;
+}
+
+/* THUMBNAILS */
 .nav-slider .swiper-slide {
   height: calc(100vh / 12);
   background-size: cover;
   background-position: center;
-  cursor: pointer;
-  filter: brightness(40%) contrast(120%);
-  transition: all 0.3s ease;
+  filter: brightness(35%) contrast(120%);
+  transition: filter 0.3s ease;
 }
 
+/* ACTIVO */
 .nav-slider .swiper-slide-thumb-active {
   filter: brightness(90%) contrast(120%);
   outline: 2px solid #fff;
