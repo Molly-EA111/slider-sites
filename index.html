@@ -5,8 +5,8 @@
   <title>Slider Swiper - Google Sites</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Swiper CSS CDN -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+  <!-- Swiper CSS v6 -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css">
 
   <!-- CSS propio -->
   <link rel="stylesheet" href="css/style.css">
@@ -14,29 +14,83 @@
 
 <body>
 
-  <!-- SLIDER PRINCIPAL -->
-  <div class="swiper main-slider">
-    <div class="swiper-wrapper">
-      <!-- AQUÍ VAN LOS SLIDES -->
+<!-- SLIDER PRINCIPAL -->
+<div class="swiper main-slider">
+  <div class="swiper-wrapper">
+
+    <!-- SLIDES (img(2) a img(13)) -->
+
+    <div class="swiper-slide">
+      <div class="slide-bgimg" style='background-image:url("images/img(2).png")'>
+        <div class="content">
+          <p class="title">Imagen 2</p>
+          <span class="caption">Descripción imagen 2</span>
+        </div>
+      </div>
     </div>
 
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
-
-  <!-- SLIDER THUMBNAILS -->
-  <div class="swiper nav-slider">
-    <div class="swiper-wrapper">
-      <!-- THUMBNAILS -->
+    <div class="swiper-slide">
+      <div class="slide-bgimg" style='background-image:url("images/img(3).png")'>
+        <div class="content">
+          <p class="title">Imagen 3</p>
+          <span class="caption">Descripción imagen 3</span>
+        </div>
+      </div>
     </div>
+
+    <div class="swiper-slide">
+      <div class="slide-bgimg" style='background-image:url("images/img(4).png")'>
+        <div class="content">
+          <p class="title">Imagen 4</p>
+          <span class="caption">Descripción imagen 4</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="swiper-slide">
+      <div class="slide-bgimg" style='background-image:url("images/img(5).png")'>
+        <div class="content">
+          <p class="title">Imagen 5</p>
+          <span class="caption">Descripción imagen 5</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="swiper-slide">
+      <div class="slide-bgimg" style='background-image:url("images/img(6).png")'>
+        <div class="content">
+          <p class="title">Imagen 6</p>
+          <span class="caption">Descripción imagen 6</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Puedes seguir hasta img(13).png -->
+
   </div>
 
-  <!-- Swiper JS CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
 
-  <!-- JS propio -->
+<!-- SLIDER DE NAVEGACIÓN -->
+<div class="swiper nav-slider">
+  <div class="swiper-wrapper">
+
+    <div class="swiper-slide" style='background-image:url("images/img(2).png")'></div>
+    <div class="swiper-slide" style='background-image:url("images/img(3).png")'></div>
+    <div class="swiper-slide" style='background-image:url("images/img(4).png")'></div>
+    <div class="swiper-slide" style='background-image:url("images/img(5).png")'></div>
+    <div class="swiper-slide" style='background-image:url("images/img(6).png")'></div>
+
+  </div>
+</div>
+
+<!-- Swiper JS v6 -->
 <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
+
+<!-- JS propio -->
+<script src="js/main.js"></script>
 
 </body>
 </html>
-
