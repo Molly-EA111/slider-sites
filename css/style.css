@@ -1,14 +1,19 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  overflow: hidden;
   background: #000;
+}
+
+/* 📐 CONTENEDOR 16:9 EXACTO */
+.slider-16x9 {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
 }
 
 .main-slider {
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 
 .swiper-slide {
@@ -16,43 +21,30 @@ html, body {
   overflow: hidden;
 }
 
-/* Imagen base */
+/* IMAGEN */
 .slide-bgimg {
   position: absolute;
   inset: 0;
-  background-repeat: no-repeat;
+  background-size: cover;
   background-position: center;
-  background-size: cover; /* ancho completo */
-  transition: transform 10s ease;
-}
-
-/* 🎥 ZOOM IN */
-.zoom-in .slide-bgimg {
+  background-repeat: no-repeat;
   transform: scale(1);
-}
-.zoom-in.swiper-slide-active .slide-bgimg {
-  transform: scale(1.06);
+  transition: transform 6s ease; /* ⏱️ 60 % */
 }
 
-/* 🎥 ZOOM OUT */
-.zoom-out .slide-bgimg {
-  transform: scale(1.06);
-}
-.zoom-out.swiper-slide-active .slide-bgimg {
-  transform: scale(1);
+/* 🎥 PAN + KEN BURNS */
+.pan-x-in.swiper-slide-active .slide-bgimg {
+  transform: scale(1.06) translateX(-3%);
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-  .main-slider {
-    height: 70vh;
-  }
+.pan-x-out.swiper-slide-active .slide-bgimg {
+  transform: scale(1.06) translateX(3%);
+}
 
-  .zoom-in.swiper-slide-active .slide-bgimg {
-    transform: scale(1.04);
-  }
+.pan-y-in.swiper-slide-active .slide-bgimg {
+  transform: scale(1.06) translateY(-3%);
+}
 
-  .zoom-out .slide-bgimg {
-    transform: scale(1.04);
-  }
+.pan-y-out.swiper-slide-active .slide-bgimg {
+  transform: scale(1.06) translateY(3%);
 }
