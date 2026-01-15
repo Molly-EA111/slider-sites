@@ -1,8 +1,9 @@
 var mainSlider = new Swiper('.main-slider', {
   loop: true,
+  loopAdditionalSlides: 12,
   speed: 1200,
   autoplay: {
-    delay: 6000, // ⏱️ MÁS TIEMPO POR SLIDE
+    delay: 6000,
     disableOnInteraction: false
   },
   navigation: {
@@ -12,13 +13,15 @@ var mainSlider = new Swiper('.main-slider', {
 });
 
 var navSlider = new Swiper('.nav-slider', {
+  loop: true,                     // 🔁 LOOP ACTIVADO
+  loopAdditionalSlides: 12,        // 🔁 REPLICA THUMBNAILS
   direction: 'vertical',
   slidesPerView: 12,
   spaceBetween: 2,
-  centeredSlides: false,
+  centeredSlides: true,
   slideToClickedSlide: true,
-  watchSlidesVisibility: true,
-  watchSlidesProgress: true
+  watchSlidesProgress: true,
+  allowTouchMove: true
 });
 
 mainSlider.controller.control = navSlider;
