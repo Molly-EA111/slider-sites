@@ -1,126 +1,58 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html, body {
   height: 100%;
   overflow: hidden;
-  font-family: Arial, sans-serif;
+  background: #000;
 }
 
-/* ===== CONTENEDORES ===== */
-
+/* MAIN SLIDER */
 .main-slider {
   width: 80%;
   height: 100vh;
   float: left;
-  transition: opacity 0.6s ease, transform 0.3s ease;
-}
-
-.nav-slider {
-  width: 20%;
-  height: 100vh;
-  float: left;
-  padding-left: 5px;
-}
-
-/* ===== SLIDES ===== */
-
-.swiper-slide {
-  overflow: hidden;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
 .slide-bgimg {
   position: absolute;
   inset: 0;
-  background-position: center;
   background-size: cover;
+  background-position: center;
 }
 
-.entity-img {
-  display: none;
+/* NAV SLIDER */
+.nav-slider {
+  width: 20%;
+  height: 100vh;
+  float: left;
+  background: #000;
 }
-
-/* ===== CONTENIDO ===== */
-
-.content {
-  position: absolute;
-  top: 40%;
-  left: 0;
-  width: 50%;
-  padding-left: 5%;
-  color: #fff;
-}
-
-.content .title {
-  font-size: 2.6em;
-  font-weight: bold;
-  margin-bottom: 30px;
-}
-
-.content .caption {
-  display: block;
-  font-size: 13px;
-  line-height: 1.4;
-  transform: translateX(50px);
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.7s ease;
-}
-
-.content .caption.show {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-/* ===== NAV SLIDER ===== */
 
 .nav-slider .swiper-slide {
+  height: calc(100vh / 12);
+  background-size: cover;
+  background-position: center;
   cursor: pointer;
-  opacity: 0.4;
-  transition: opacity 0.3s ease;
-}
-
-.nav-slider .swiper-slide-thumb-active {
-  opacity: 1;
-}
-
-.nav-slider .content .title {
-  font-size: 20px;
-}
-
-/* ===== BOTONES ===== */
-
-.swiper-button-prev,
-.swiper-button-next {
-  width: 44px;
-  opacity: 0;
-  visibility: hidden;
+  filter: brightness(40%) contrast(120%);
   transition: all 0.3s ease;
 }
 
-.main-slider:hover .swiper-button-prev,
-.main-slider:hover .swiper-button-next {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0);
+.nav-slider .swiper-slide-thumb-active {
+  filter: brightness(90%) contrast(120%);
+  outline: 2px solid #fff;
 }
 
-.swiper-button-prev {
-  transform: translateX(50px);
-}
-
+/* BOTONES */
+.swiper-button-prev,
 .swiper-button-next {
-  transform: translateX(-50px);
+  color: #fff;
 }
 
-/* ===== RESPONSIVE (Google Sites) ===== */
-
+/* RESPONSIVE */
 @media (max-width: 900px) {
   .main-slider,
   .nav-slider {
@@ -129,9 +61,7 @@ html, body {
     float: none;
   }
 
-  .content {
-    width: 90%;
-    top: 60%;
+  .nav-slider .swiper-slide {
+    height: auto;
   }
 }
-
