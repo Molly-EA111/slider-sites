@@ -1,89 +1,94 @@
-// Params
-let mainSliderSelector = '.main-slider',
-    navSliderSelector = '.nav-slider',
-    interleaveOffset = 0.5;
+// SELECTORES
+var mainSliderSelector = '.main-slider';
+var navSliderSelector = '.nav-slider';
+var interleaveOffset = 0.5;
 
-// Main Slider
-let mainSliderOptions = {
-      loop: true,
-      speed:1000,
-      autoplay:{
-        delay:3000
-      },
-      loopAdditionalSlides: 10,
-      grabCursor: true,
-      watchSlidesProgress: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      on: {
-        init: function(){
-          this.autoplay.stop();
-        },
-        imagesReady: function(){
-          this.el.classList.remove('loading');
-          this.autoplay.start();
-        },
-        slideChangeTransitionEnd: function(){
-          let swiper = this,
-              captions = swiper.el.querySelectorAll('.caption');
-          for (let i = 0; i < captions.length; ++i) {
-            captions[i].classList.remove('show');
-          }
-          swiper.slides[swiper.activeIndex].querySelector('.caption').classList.add('show');
-        },
-        progress: function(){
-          let swiper = this;
-          for (let i = 0; i < swiper.slides.length; i++) {
-            let slideProgress = swiper.slides[i].progress,
-                innerOffset = swiper.width * interleaveOffset,
-                innerTranslate = slideProgress * innerOffset;
-           
-            swiper.slides[i].querySelector(".slide-bgimg").style.transform =
-              "translateX(" + innerTranslate + "px)";
-          }
-        },
-        touchStart: function() {
-          let swiper = this;
-          for (let i = 0; i < swiper.slides.length; i++) {
-            swiper.slides[i].style.transition = "";
-          }
-        },
-        setTransition: function(speed) {
-          let swiper = this;
-          for (let i = 0; i < swiper.slides.length; i++) {
-            swiper.slides[i].style.transition = speed + "ms";
-            swiper.slides[i].querySelector(".slide-bgimg").style.transition =
-              speed + "ms";
-          }
-        }
+// SLIDER PRINCIPAL
+var mainSlider = new Swiper(mainSliderSelector, {
+  loop: true,
+  speed: 1000,
+  grabCursor: true,
+  watchSlidesProgress: true,
+
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false
+  },
+
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev'
+  },
+
+  on: {
+    init: function () {
+      // Forzar autoplay seguro en iframe
+      var swiper = this;
+      setTimeout(function () {
+        swiper.autoplay.start();
+      }, 500);
+    },
+
+    slideChangeTransitionEnd: function () {
+      var swiper = this;
+      var captions = swiper.el.querySelectorAll('.caption');
+
+      captions.forEach(function (el) {
+        el.classList.remove('show');
+      });
+
+      var activeCaption = swiper.slides[swiper.activeIndex].querySelector('.caption');
+      if (activeCaption) {
+        activeCaption.classList.add('show');
       }
-    };
-let mainSlider = new Swiper(mainSliderSelector, mainSliderOptions);
+    },
 
-// Navigation Slider
-let navSliderOptions = {
-      loop: true,
-      loopAdditionalSlides: 10,
-      speed:1000,
-      spaceBetween: 5,
-      slidesPerView: 5,
-      centeredSlides : true,
-      touchRatio: 0.2,
-      slideToClickedSlide: true,
-      direction: 'vertical',
-      on: {
-        imagesReady: function(){
-          this.el.classList.remove('loading');
-        },
-        click: function(){
-          mainSlider.autoplay.stop();
+    progress: function () {
+      var swiper = this;
+
+      swiper.slides.forEach(function (slide) {
+        var slideProgress = slide.progress;
+        var innerOffset = swiper.width * interleaveOffset;
+        var innerTranslate = slideProgress * innerOffset;
+
+        var bg = slide.querySelector('.slide-bgimg');
+        if (bg) {
+          bg.style.transform = 'translateX(' + innerTranslate + 'px)';
         }
-      }
-    };
-let navSlider = new Swiper(navSliderSelector, navSliderOptions);
+      });
+    },
 
-// Matching sliders
+    touchStart: function () {
+      this.slides.forEach(function (slide) {
+        slide.style.transition = '';
+      });
+    },
+
+    setTransition: function (speed) {
+      this.slides.forEach(function (slide) {
+        slide.style.transition = speed + 'ms';
+
+        var bg = slide.querySelector('.slide-bgimg');
+        if (bg) {
+          bg.style.transition = speed + 'ms';
+        }
+      });
+    }
+  }
+});
+
+// SLIDER DE NAVEGACIÓN
+var navSlider = new Swiper(navSliderSelector, {
+  loop: true,
+  speed: 1000,
+  spaceBetween: 5,
+  slidesPerView: 5,
+  centeredSlides: true,
+  slideToClickedSlide: true,
+  direction: 'vertical',
+  watchSlidesProgress: true
+});
+
+// SINCRONIZAR SLIDERS
 mainSlider.controller.control = navSlider;
 navSlider.controller.control = mainSlider;
