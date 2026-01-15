@@ -1,6 +1,5 @@
 const wrapper = document.querySelector('.swiper-wrapper');
 
-/* 🔢 LISTA DE IMÁGENES (CONTROL TOTAL) */
 const images = [
   'images/img(2).png',
   'images/img(3).png',
@@ -16,28 +15,24 @@ const images = [
   'images/img(13).png'
 ];
 
-/* 🎥 MODOS DE PAN */
-const panModes = [
-  'pan-x-in',
-  'pan-x-out',
-  'pan-y-in',
-  'pan-y-out'
+const moves = [
+  'move-in',
+  'move-out',
+  'move-left',
+  'move-right',
+  'move-up',
+  'move-down'
 ];
 
 /* CREAR SLIDES */
 images.forEach(src => {
   const slide = document.createElement('div');
-  const panClass = panModes[Math.floor(Math.random() * panModes.length)];
-
-  slide.className = `swiper-slide ${panClass}`;
-  slide.innerHTML = `
-    <div class="slide-bgimg" data-src="${src}"></div>
-  `;
-
+  slide.className = 'swiper-slide';
+  slide.innerHTML = `<div class="slide-bgimg" data-src="${src}"></div>`;
   wrapper.appendChild(slide);
 });
 
-/* ⚡ LAZY LOADING REAL */
+/* LAZY LOADING */
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -46,19 +41,34 @@ const observer = new IntersectionObserver(entries => {
       observer.unobserve(el);
     }
   });
-}, { rootMargin: '200px' });
+}, { rootMargin: '300px' });
 
 document.querySelectorAll('.slide-bgimg').forEach(img => observer.observe(img));
 
-/* 🚀 INICIALIZAR SWIPER */
-new Swiper('.main-slider', {
+/* INICIALIZAR SWIPER */
+const swiper = new Swiper('.main-slider', {
   loop: true,
   effect: 'fade',
   fadeEffect: { crossFade: true },
   speed: 1200,
   autoplay: {
-    delay: 5400,   // ⏱️ 60 % del tiempo original
+    delay: 5400, // 60 %
     disableOnInteraction: false
   },
-  allowTouchMove: true
+  on: {
+    slideChangeTransitionStart() {
+      document
+        .querySelectorAll('.slide-bgimg')
+        .forEach(img => img.className = 'slide-bgimg');
+    },
+    slideChangeTransitionEnd() {
+      const activeImg = document
+        .querySelector('.swiper-slide-active .slide-bgimg');
+
+      if (!activeImg) return;
+
+      const move = moves[Math.floor(Math.random() * moves.length)];
+      requestAnimationFrame(() => activeImg.classList.add(move));
+    }
+  }
 });
