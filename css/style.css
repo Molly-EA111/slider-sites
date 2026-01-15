@@ -4,7 +4,7 @@ html, body {
   background: #000;
 }
 
-/* 📐 CONTENEDOR 16:9 EXACTO */
+/* 16:9 exacto */
 .slider-16x9 {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -28,23 +28,33 @@ html, body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
+  /* 🔑 SIEMPRE animada */
   transform: scale(1);
-  transition: transform 6s ease; /* ⏱️ 60 % */
+  transition: transform 6s ease;
 }
 
-/* 🎥 PAN + KEN BURNS */
-.pan-x-in.swiper-slide-active .slide-bgimg {
-  transform: scale(1.06) translateX(-3%);
+/* ESTADOS CONTROLADOS POR JS */
+.move-in {
+  transform: scale(1.08) translate(-3%, -3%);
 }
 
-.pan-x-out.swiper-slide-active .slide-bgimg {
-  transform: scale(1.06) translateX(3%);
+.move-out {
+  transform: scale(1.08) translate(3%, 3%);
 }
 
-.pan-y-in.swiper-slide-active .slide-bgimg {
-  transform: scale(1.06) translateY(-3%);
+.move-left {
+  transform: scale(1.08) translateX(-4%);
 }
 
-.pan-y-out.swiper-slide-active .slide-bgimg {
-  transform: scale(1.06) translateY(3%);
+.move-right {
+  transform: scale(1.08) translateX(4%);
+}
+
+.move-up {
+  transform: scale(1.08) translateY(-4%);
+}
+
+.move-down {
+  transform: scale(1.08) translateY(4%);
 }
