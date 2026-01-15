@@ -11,35 +11,48 @@ html, body {
   height: 100vh;
 }
 
-/* Slide */
 .swiper-slide {
   position: relative;
   overflow: hidden;
 }
 
-/* IMAGEN A ANCHO COMPLETO */
+/* Imagen base */
 .slide-bgimg {
   position: absolute;
   inset: 0;
   background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover; /* 🔥 ANCHO COMPLETO */
-  transform: scale(1);
+  background-position: center;
+  background-size: cover; /* ancho completo */
   transition: transform 10s ease;
 }
 
-/* 🎥 KEN BURNS SUAVE */
-.swiper-slide-active .slide-bgimg {
-  transform: scale(1.06); /* 👈 zoom controlado */
+/* 🎥 ZOOM IN */
+.zoom-in .slide-bgimg {
+  transform: scale(1);
+}
+.zoom-in.swiper-slide-active .slide-bgimg {
+  transform: scale(1.06);
 }
 
-/* Ajuste móvil */
+/* 🎥 ZOOM OUT */
+.zoom-out .slide-bgimg {
+  transform: scale(1.06);
+}
+.zoom-out.swiper-slide-active .slide-bgimg {
+  transform: scale(1);
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .main-slider {
     height: 70vh;
   }
 
-  .swiper-slide-active .slide-bgimg {
+  .zoom-in.swiper-slide-active .slide-bgimg {
+    transform: scale(1.04);
+  }
+
+  .zoom-out .slide-bgimg {
     transform: scale(1.04);
   }
 }
